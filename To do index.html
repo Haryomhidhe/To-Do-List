@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app">
+
+    <aside class="sidebar">
+      <h2>TaskMaster</h2>
+      <button class="create-btn">Create + </button>
+
+      <nav>
+        <h3>To-Do Items</h3>
+        <button href="#" class="sidebar-menu" onclick="renderTasks('Inbox')">Inbox</button>
+
+        <h3>Categories</h3>
+          <button href="#" class="sidebar-menu" onclick="renderTasks('Urgent')">Urgent</button>
+          <button href="#" class="sidebar-menu" onclick="renderTasks('Planned')">Planned</button>
+          <button href="#" class="sidebar-menu" onclick="renderTasks('Not so Urgent')">Not so Urgent</button>
+        </nav>
+    </aside>
+    <main class="task-area">
+    <h1>My Tasks</h1>
+    <div id="task-list">
+        <p>Your list is currently empty.</p> 
+    </div>
+</main>
+</div>
+
+</div>
+  <script src="script.js"></script>
+</body>
+</html>
