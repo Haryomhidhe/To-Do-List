@@ -1,6 +1,11 @@
 // 1. SELECTORS & VARIABLES
 const createBtn = document.querySelector('.create-btn');
 const taskListDiv = document.querySelector('#task-list');
+const modal = document.querySelector('#task-modal');
+const saveBtn = document.querySelector('#save-btn');
+const cancelBtn = document.querySelector('#cancel-btn');
+const nameInput = document.querySelector('#modal-task-name');
+const categoryInput = document.querySelector('#modal-task-category');
 let tasks = []; // We move this to the top so everyone can use it
 
 // 2. LOAD SAVED DATA (The Memory)
@@ -14,25 +19,31 @@ if (savedTasks) {
 
 // 3. CREATE BUTTON LISTENER (The Input)
 createBtn.addEventListener('click', function() {
-  const taskName = prompt("What is your new task?");
+   modal.classList.remove('hidden');
+});
+
+saveBtn.addEventListener('click', function(){
+  const taskName = nameInput.value;
+  const taskCategory = categoryInput.value;
 
   if (taskName) {
-    const taskCategory = prompt("Which category? (Urgent, planned, or Inbox)");
-    
-    // Create the task object
-    const newTask = {
-      name: taskName,
-      category: taskCategory
-    };
+      const newTask = {
+        name: taskName,
+        category: taskCategory
+      };
 
-    // Save to Memory
-    tasks.push(newTask);
-    localStorage.setItem('myTasks', JSON.stringify(tasks));
-
-    // Show on Screen (Using the Blueprint!)
-    renderTask(newTask);
+      tasks.push(newTask);
+      localStorage.setItem('myTasks', JSON.stringify(tasks));
+      renderTask(newTask);
+      modal.classList.add('hidden');
+      nameInput.value = '';
   }
 });
+
+cancelBtn.addEventListener('click', function(){
+  modal.classList.add('hidden');
+  nameInput.value = '';
+})
 
 // 4. THE BLUEPRINT FUNCTION (The Worker)
 function renderTask(task) {

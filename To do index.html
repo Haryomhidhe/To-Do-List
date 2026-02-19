@@ -11,7 +11,7 @@
 
     <aside class="sidebar">
       <h2>TaskMaster</h2>
-      <button class="create-btn">Create + </button>
+      <button class="create-btn">+ Add a Task</button>
 
       <nav>
         <h3>To-Do Items</h3>
@@ -20,18 +20,36 @@
         <h3>Categories</h3>
           <button href="#" class="sidebar-menu" onclick="renderTasks('Urgent')">Urgent</button>
           <button href="#" class="sidebar-menu" onclick="renderTasks('Planned')">Planned</button>
-          <button href="#" class="sidebar-menu" onclick="renderTasks('Not so Urgent')">Not so Urgent</button>
         </nav>
     </aside>
     <main class="task-area">
-    <h1>My Tasks</h1>
+    <h1>Tasks </h1>
     <div id="task-list">
-        <p>Your list is currently empty.</p> 
+        <p class="empty-taskbar">Everything looks clear! Add a task to stay organized.</p> 
     </div>
 </main>
 </div>
 
 </div>
+  <div id="task-modal" class="modal hidden">
+    <div class="modal-content">
+      <h3>New Task</h3>
+      <input type="text" id="modal-task-name" placeholder="What is the task?">
+      
+      <select id="modal-task-category" >
+        <option value="Inbox">Inbox</option>
+        <option value="Urgent">Urgent</option>
+        <option value="Planned">Planned</option>
+      </select>
+
+      <div class="modal-buttons">
+        <button id="cancel-btn">Cancel</button>
+        <button id="save-btn">Save</button>
+      </div>
+    </div>
+  </div>
+
+
   <script src="script.js"></script>
 </body>
 </html>

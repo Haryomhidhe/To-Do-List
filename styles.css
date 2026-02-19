@@ -10,7 +10,7 @@ width: 100%;
 }
 .sidebar{
     width: 280px;    
-    background: rgb(207, 200, 200); 
+    background: rgb(243, 237, 237); 
     flex-shrink: 0;
     height: 100vh;
     padding: 20px;
@@ -20,10 +20,10 @@ width: 100%;
   background-color: rgb(219, 76, 63);
   border-radius: 10px;
   border: none;
-  padding: 15px 20px;
+  padding: 15px 60px;
   color: rgb(226, 214, 214);
   margin-bottom: 20px;
-  margin-left: 60px;
+  margin-left: 40px;
   cursor: pointer;
   font-size: larger;
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
@@ -33,11 +33,10 @@ width: 100%;
   display: block;
   margin-bottom: 20px;
   
-  padding: 5px 20px; 
+  padding: 10px 40px; 
   border-radius: 8px;
   border: none;
-  margin-left: 20px;
-  background-color: rgb(218, 155, 150);
+  background-color: rgb(207, 198, 198);
   cursor: pointer;
   font-family: 'Courier New', Courier, monospace;
 }
@@ -55,4 +54,65 @@ h3{
 .task-area{
   flex-grow: 1; 
   padding: 40px;
+}
+/* 1. The Dark Background Overlay */
+.modal {
+  position: fixed;       /* Stay in place even if scrolling */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
+  display: flex;         /* Use Flexbox to center the white box */
+  justify-content: center;
+  align-items: center;
+
+}
+
+/* 2. The White Box (The actual popup) */
+.modal-content {
+  background-color: white;
+  padding: 30px;
+  border-radius: 10px;
+  width: 300px;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+/* 3. Making the Inputs look nice */
+.modal-content input, .modal-content select {
+  width: 90%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+}
+
+/* 4. The Buttons */
+.modal-buttons {
+  display: flex;
+  justify-content: space-between; /* Push buttons apart */
+  margin-top: 15px;
+}
+
+#save-btn {
+  background-color: rgb(219, 76, 63);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#cancel-btn {
+  background-color: #ccc;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* 5. The Magic Class to Hide it */
+.hidden {
+  display: none;
 }
