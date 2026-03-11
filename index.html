@@ -8,26 +8,27 @@
 </head>
 <body>
   <div class="app">
-
-    <aside class="sidebar">
-      <h2>TaskMaster</h2>
-      <button class="create-btn">+ Add a Task</button>
-
-      <nav>
-        <h3>To-Do Items</h3>
-        <button href="#" class="sidebar-menu" onclick="renderTasks('Inbox')">Inbox</button>
-
-        <h3>Categories</h3>
-          <button href="#" class="sidebar-menu" onclick="renderTasks('Urgent')">Urgent</button>
-          <button href="#" class="sidebar-menu" onclick="renderTasks('Planned')">Planned</button>
-        </nav>
-    </aside>
-    <main class="task-area">
-    <h1>Tasks </h1>
-    <div id="task-list">
-        <p class="empty-taskbar">Everything looks clear! Add a task to stay organized.</p> 
-    </div>
-</main>
+    <header>
+      <h1>To Do List </h1>
+      <button id="create-btn">create +</button>
+    </header>
+    <div class="board">
+      <div class="column" id="inbox"><h3>Inbox</h3>
+        <div id="inbox-card"></div>
+      </div>
+      <div class="column" id="urgent"><h3>Urgent</h3>
+        <div id="urgent-card"></div>
+      </div>
+      <div class="column" id="planned"><h3>Planned</h3>
+        <div id="planned-card"></div>
+      </div>
+      <div class="column" id="done"><h3>Done</h3>
+        <div id="done-card"></div>
+      </div>
+      <div>
+        <button id="new-column"> Add column +</button>
+      </div>
+      </div>
 </div>
 
 </div>
@@ -36,11 +37,12 @@
       <h3>New Task</h3>
       <input type="text" id="modal-task-name" placeholder="What is the task?">
       
-      <select id="modal-task-category" >
+    <select id="modal-task-category" title="Task Category" >
         <option value="Inbox">Inbox</option>
         <option value="Urgent">Urgent</option>
         <option value="Planned">Planned</option>
       </select>
+      <input placeholder="Date and time" id="date" type="datetime-local">
 
       <div class="modal-buttons">
         <button id="cancel-btn">Cancel</button>
