@@ -12,8 +12,10 @@ const categoryInput = document.querySelector('#modal-task-category');
 const date = document.querySelector('#date');
 const newcolumn = document.querySelector('#new-column');
 const board = document.querySelector('.board');
+const searchBar = document.querySelector('#search-bar')
 // const editBtn = document.querySelector('.edit-btn');
 let tasks = []; // We move this to the top so everyone can use it
+let columns = [];
 let currentEditTask = null;
 // 2. LOAD SAVED DATA (The Memory)
 const savedTasks = localStorage.getItem('myTasks');
@@ -23,28 +25,52 @@ if (savedTasks) {
     renderTask(task); // We use the blueprint to draw saved tasks
   });
 };
+const savedColumns = localStorage.getItem('myColumns');
+if (savedColumns) {
+  columns = JSON.parse(savedColumns);
+  columns.forEach(function(cleanName) {
+        const newCol = document.createElement('div');
+    newCol.className = 'column';
+    newCol.innerHTML = `
+      <h3>${cleanName}</h3>
+      <div id="${cleanName}-card"></div>`;
+    board.appendChild(newCol);
+    const newOption = document.createElement('option');
+newOption.value = cleanName;
+newOption.textContent = cleanName;
+categoryInput.appendChild(newOption);
+  });
+}
+searchBar.addEventListener('input', function(){
+  const searchValue = searchBar.value.toLowerCase();
+  const filteredTasks = tasks.filter(task=>
+    task.name.toLowerCase().includes(searchValue))
+  document.querySelectorAll('.column>div').forEach(div=>div.innerHTML='');
+  filteredTasks.forEach(task=>renderTask(task));
+});
 newcolumn.addEventListener('click', function(){
   const columnName = prompt('Enter column name:');
   console.log(columnName)
   if(columnName){
+   const cleanName = columnName.replace(/[^a-zA-Z0-9]/g, '').replace(/^[0-9]+/, '');
     const newCol = document.createElement('div')
     newCol.className = 'column';
+    columns.push(cleanName);
+    localStorage.setItem('myColumns', JSON.stringify(columns));
     newCol.innerHTML = `
   <h3>${columnName}</h3>
-  <div id="${columnName}-card"></div>`;
-  const newOption = document.createElement('option');
-newOption.value = columnName;
-newOption.textContent = columnName;
-categoryInput.appendChild(newOption);
-board.appendChild(newCol);
+  <div id="${cleanName}-card"></div>`;
+    const newOption = document.createElement('option');
+    newOption.value = cleanName;
+    newOption.textContent = columnName;
+    categoryInput.appendChild(newOption);
+    board.appendChild(newCol);
   }
-  const customCard = document.querySelector(`#${columnName}-card`)
 });
-
 
 // 3. CREATE BUTTON LISTENER (The Input)
 createBtn.addEventListener('click', function() {
-   modal.classList.remove('hidden');``
+   modal.classList.remove('hidden');
 });
 
 saveBtn.addEventListener('click', function(){
@@ -97,23 +123,19 @@ function renderTask(task) {
     </div>
   `;
   if (task.category === "Inbox") {
-      inboxCard.appendChild(taskCard);
-  }
-  if (task.category === "Urgent") {
-      urgentCard.appendChild(taskCard);
-  }
-  if (task.category === "Planned") {
-      plannedCard.appendChild(taskCard);
-  }
-  if (task.category === "Done") {
-      doneCard.appendChild(taskCard);
-  }else {
-  const customCard = document.querySelector(`#${task.category}-card`);
-  if (customCard) {
-    customCard.appendChild(taskCard);
-  }
+    inboxCard.appendChild(taskCard);
+} else if (task.category === "Urgent") {
+    urgentCard.appendChild(taskCard);
+} else if (task.category === "Planned") {
+    plannedCard.appendChild(taskCard);
+} else if (task.category === "Done") {
+    doneCard.appendChild(taskCard);
+} else {
+    const customCard = document.querySelector(`#${task.category}-card`);
+    if (customCard) {
+        customCard.appendChild(taskCard);
+    }
 }
-
 
   
   // D. Delete Logic
@@ -159,6 +181,7 @@ deleteBtn.addEventListener('click', function() {
 }
 function renderTasks(category) {
   // 1. Clear the whiteboard
+  document.querySelectorAll('.column > div').forEach(div => div.innerHTML = '');
   inboxCard.innerHTML = '';
   urgentCard.innerHTML = '';
   plannedCard.innerHTML = '';

@@ -84,8 +84,12 @@ h3{
   justify-content: space-between; /* Push buttons apart */
   margin-top: 15px;
 }
-
-#save-btn {
+#search-bar{
+  padding: 12px;
+  border-radius: 12px;
+  border: none;
+}
+#save-btn,#create-btn {
   background-color: rgb(63, 162, 219);
   color: white;
   border: none;
