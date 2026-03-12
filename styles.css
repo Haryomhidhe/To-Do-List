@@ -1,171 +1,345 @@
-body{
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background-color: rgb(24, 90, 153);
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
-}
-header{
-  border-radius: 10px;
-  background-color: rgb(140, 190, 210);
-  box-shadow: 0 4px 10px rgba(0,0,0,0.5);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 5px;
-}
-.app{
-min-height: 100vh;
-width: 100%;
-}
-.column{
-  background-color: rgb(186, 210, 224);
-  width: 300px;
-  padding: 10px;
-  margin: 10px;
-  border-radius: 12px;
-  box-shadow: 0 10px 10px rgba(0,0,0,0.5);
-
-}
-.board{
-  display: flex;
-  justify-content: space-between; 
-  align-items: flex-start;
-  overflow-x: auto;
-  flex-wrap:nowrap;
-}
-h2{
-  color: rgb(219, 76, 63);
-  font-size: 30px;
-   text-align: center;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-}
-h3{
-  font-size: 25px;
-  color: rgb(70, 68, 68);
-  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-}
-
-
-.modal {
-  position: fixed;       /* Stay in place even if scrolling */
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
-  display: flex;         /* Use Flexbox to center the white box */
-  justify-content: center;
-  align-items: center;
-
-}
-
-/* 2. The White Box (The actual popup) */
-.modal-content {
-  background-color: white;
-  padding: 30px;
-  border-radius: 10px;
-  width: 300px;
-  text-align: center;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-}
-
-/* 3. Making the Inputs look nice */
-.modal-content input, .modal-content select {
-  width: 90%;
-  padding: 10px;
-  margin: 10px 0;
-  border: 1px solid #ddd;
-  border-radius: 10px;
-}
-
-/* 4. The Buttons */
-.modal-buttons {
-  display: flex;
-  justify-content: space-between; /* Push buttons apart */
-  margin-top: 15px;
-}
-#search-bar{
-  padding: 12px;
-  border-radius: 12px;
-  border: none;
-}
-#save-btn,#create-btn {
-  background-color: rgb(63, 162, 219);
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-#cancel-btn {
-  background-color: #ccc;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-/* 5. The Magic Class to Hide it */
-.hidden {
-  display: none;
-}
-.delete-btn,.edit-btn{
-  color: rgb(255, 244, 244);
-  border: none;
-  border-radius: 6px;
-  padding: 10px 10px;
-  font-size: 12px;
-  background-color: rgb(63, 162, 219)
-}
-.task-card{
-  display: flex;
-  justify-content: space-between;
-  flex-direction: column;
-  width: 100%;
-  background-color: rgb(250, 250, 250);
-  border: 1px;
-  padding: 15px;
-  box-shadow: 2px 3px 10px 4px rgba(0, 0, 0, 0.5);
-  border-radius: 10px;
-  margin-bottom: 5%;
+/* ── RESET & BASE ── */
+*, *::before, *::after {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: #0052cc;
+  background-image: linear-gradient(135deg, #0747a6 0%, #0052cc 50%, #0065ff 100%);
+  min-height: 100vh;
+  color: #172b4d;
+}
 
-.card-buttons{
+.app {
+  min-height: 100vh;
   display: flex;
-  gap: 8px;
-  visibility: hidden;
+  flex-direction: column;
 }
-.task-card:hover .card-buttons{
-  visibility: visible;
-}
-.check-box{
+
+/* ── HEADER ── */
+header {
+  background-color: rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
   display: flex;
   align-items: center;
+  gap: 12px;
+  padding: 10px 16px;
+  height: 52px;
+  border-radius: 0;
 }
-.category-badge{
-  padding: 10px;
-  border-radius: 10px;
-  font-size: small;
-  background-color: gray;
+
+header h1 {
+  font-size: 16px;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: -0.2px;
+  white-space: nowrap;
+}
+
+#search-bar {
+  background-color: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #ffffff;
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  padding: 6px 12px;
+  border-radius: 4px;
+  outline: none;
+  width: 200px;
+  transition: background 0.15s, border-color 0.15s, width 0.2s;
+}
+
+#search-bar::placeholder { color: rgba(255, 255, 255, 0.65); }
+
+#search-bar:focus {
+  background-color: #ffffff;
+  color: #172b4d;
+  border-color: #ffffff;
+  width: 240px;
+}
+
+#search-bar:focus::placeholder { color: #97a0af; }
+
+#create-btn {
+  background-color: rgba(255, 255, 255, 0.25);
+  color: #ffffff;
+  border: none;
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 6px 14px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.15s;
+  white-space: nowrap;
+  margin-left: auto;
+}
+
+#create-btn:hover { background-color: rgba(255, 255, 255, 0.35); }
+
+/* ── BOARD ── */
+.board {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 16px 12px;
+  overflow-x: auto;
+  flex-wrap: nowrap;
+  min-height: calc(100vh - 52px);
+}
+
+.board::-webkit-scrollbar { height: 8px; }
+.board::-webkit-scrollbar-track { background: rgba(0,0,0,0.15); border-radius: 4px; }
+.board::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.3); border-radius: 4px; }
+
+/* ── COLUMN ── */
+.column {
+  background-color: #ebecf0;
+  width: 272px;
+  min-width: 272px;
+  max-width: 272px;
+  border-radius: 8px;
+  padding: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.25);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: calc(100vh - 88px);
+  overflow-y: auto;
+}
+
+.column::-webkit-scrollbar { width: 4px; }
+.column::-webkit-scrollbar-thumb { background: #c1c7d0; border-radius: 4px; }
+
+/* ── COLUMN HEADER ── */
+h2, h3 {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: #172b4d;
+  padding: 4px 6px 6px;
+  letter-spacing: 0px;
+  line-height: 20px;
+}
+
+/* ── TASK CARD ── */
+.task-card {
+  background-color: #ffffff;
+  border-radius: 6px;
+  padding: 10px 10px 8px;
+  box-shadow: 0 1px 2px rgba(9,30,66,0.25);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: box-shadow 0.15s, border-color 0.15s, transform 0.1s;
+  position: relative;
+  margin-bottom: 0;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.task-card:hover {
+  box-shadow: 0 4px 8px rgba(9,30,66,0.3);
+  border-color: #0052cc;
+  transform: translateY(-1px);
+}
+
+/* ── CHECKBOX ROW ── */
+.check-box {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.check-box input[type="checkbox"] {
+  width: 14px;
+  height: 14px;
+  border-radius: 3px;
+  accent-color: #0052cc;
+  cursor: pointer;
+  flex-shrink: 0;
+  margin: 0;
+}
+
+.check-box span {
+  font-size: 14px;
+  font-weight: 500;
+  color: #172b4d;
+  line-height: 20px;
+  word-break: break-word;
+}
+
+/* ── CATEGORY BADGE ── */
+.category-badge {
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 600;
   display: inline-block;
   width: fit-content;
+  color: #ffffff;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
 }
-.Urgent{
-  background-color: red;
+
+.Urgent  { background-color: #de350b; }
+.Inbox   { background-color: #6b778c; }
+.Planned { background-color: #0052cc; }
+.Done    { background-color: #00875a; }
+
+/* ── DATE TEXT ── */
+.task-card > span:not(.category-badge) {
+  font-size: 11px;
+  color: #5e6c84;
 }
-.Inbox{
-  background-color: gray;
+
+/* ── CARD BUTTONS ── */
+.card-buttons {
+  display: flex;
+  gap: 6px;
+  visibility: hidden;
+  margin-top: 2px;
 }
-.Planned{
-  background-color: rgb(24, 164, 230);
-}
-#new-column{
-  background: transparent;
-  background-color: lightblue;
-  padding: 15px;
+
+.task-card:hover .card-buttons { visibility: visible; }
+
+.delete-btn, .edit-btn {
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
   border: none;
-  border-radius: 12px;
+  border-radius: 4px;
+  padding: 5px 10px;
+  cursor: pointer;
+  transition: background 0.15s;
 }
+
+.edit-btn { background-color: #0052cc; color: #ffffff; }
+.edit-btn:hover { background-color: #0065ff; }
+
+.delete-btn { background-color: #ebecf0; color: #de350b; border: 1px solid #de350b; }
+.delete-btn:hover { background-color: #ffebe6; }
+
+/* ── ADD COLUMN BUTTON ── */
+#new-column {
+  background-color: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  border: none;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 10px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  white-space: nowrap;
+  min-width: 200px;
+  text-align: left;
+  transition: background 0.15s;
+  align-self: flex-start;
+}
+
+#new-column:hover { background-color: rgba(255, 255, 255, 0.3); }
+
+/* ── MODAL OVERLAY ── */
+.modal {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background-color: rgba(9, 30, 66, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+}
+
+/* ── MODAL CONTENT ── */
+.modal-content {
+  background-color: #ffffff;
+  border-radius: 8px;
+  padding: 24px;
+  width: 340px;
+  box-shadow: 0 8px 24px rgba(9, 30, 66, 0.4);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.modal-content h3 {
+  font-size: 16px;
+  font-weight: 700;
+  color: #172b4d;
+  padding: 0;
+  margin-bottom: 4px;
+}
+
+.modal-content input,
+.modal-content select {
+  width: 100%;
+  padding: 8px 10px;
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  color: #172b4d;
+  background-color: #fafbfc;
+  border: 2px solid #dfe1e6;
+  border-radius: 4px;
+  outline: none;
+  transition: border-color 0.15s, background 0.15s;
+}
+
+.modal-content input:focus,
+.modal-content select:focus {
+  border-color: #0052cc;
+  background-color: #ffffff;
+  box-shadow: 0 0 0 2px rgba(0, 82, 204, 0.15);
+}
+
+/* ── MODAL BUTTONS ── */
+.modal-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+#save-btn {
+  background-color: #0052cc;
+  color: #ffffff;
+  border: none;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 8px 18px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+#save-btn:hover { background-color: #0065ff; }
+
+#cancel-btn {
+  background-color: transparent;
+  color: #172b4d;
+  border: none;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 8px 14px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+#cancel-btn:hover { background-color: #ebecf0; }
+
+/* ── HIDDEN UTILITY ── */
+.hidden { display: none !important; }
