@@ -1,139 +1,311 @@
-body{
+
+*{
+  box-sizing: border-box;
   margin: 0;
-  font-family: Arial, sans-serif;
+  padding: 0;
+}
 
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: rgb(0, 82, 204);
+  min-height: 100%;
+  color: rgb(23, 43, 77);
 }
-.app{
-min-height: 100vh;
-display: flex;
-width: 100%;
-}
-.sidebar{
-    width: 280px;    
-    background: rgb(243, 237, 237); 
-    flex-shrink: 0;
-    height: 100vh;
-    padding: 20px;
 
+.app {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
 }
-.create-btn{
-  background-color: rgb(219, 76, 63);
-  border-radius: 10px;
+
+
+header {
+  background-color: rgba(0, 0, 0, 0.25);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 10px 16px;
+  height: 52px;
+  border-radius: 0;
+}
+
+h1 {
+  font-size: 23px;
+  font-weight: 800;
+  color: rgb(253, 251, 251);
+}
+
+#search-bar {
+  background-color: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: rgb(0, 0, 0);
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  padding: 6px 12px;
+  border-radius: 4px;
+  outline: none;
+  width: 200px;
+  transition: background 0.15s, border-color 0.15s, width 0.2s;
+}
+
+#search-bar::placeholder { color: rgba(245, 239, 239, 0.65); }
+
+#search-bar:focus {
+  background-color: rgb(255, 255, 255);
+  border-color: rgb(255, 255, 255);
+  width: 240px;
+}
+
+#search-bar:focus::placeholder { color: rgb(0, 0, 0); }
+
+#create-btn {
+  background-color: rgba(255, 255, 255, 0.25);
+  color: rgb(255, 255, 255);
   border: none;
-  padding: 15px 60px;
-  color: rgb(226, 214, 214);
-  margin-bottom: 20px;
-  margin-left: 40px;
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 6px 14px;
+  border-radius: 4px;
   cursor: pointer;
-  font-size: larger;
-  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-
+  transition: background 0.15s;
+  margin-left: auto;
 }
-.sidebar-menu{
-  display: block;
-  margin-bottom: 20px;
-  
-  padding: 10px 40px; 
+
+#create-btn:hover { background-color: rgba(255, 255, 255, 0.35); }
+
+
+.board {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 16px 12px;
+  overflow-x: auto;
+  flex-wrap: nowrap;
+  min-height: calc(100vh - 20px);
+}
+.column {
+  background-color: rgb(235, 236, 240);
+  width: 272px;
+  min-width: 272px;
+  max-width: 272px;
   border-radius: 8px;
-  border: none;
-  background-color: rgb(207, 198, 198);
+  padding: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.25);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: calc(100vh - 88px);
+  /* overflow-y: auto; */
+}
+
+h2, h3 {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: rgb(23, 43, 77);
+  padding: 4px 6px 6px;
+  letter-spacing: 0px;
+  line-height: 20px;
+}
+
+.task-card {
+  background-color: rgb(255, 255, 255);
+  border-radius: 6px;
+  padding: 10px 10px 8px;
+  box-shadow: 0 1px 2px rgba(9,30,66,0.25);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
   cursor: pointer;
-  font-family: 'Courier New', Courier, monospace;
-}
-h2{
-  color: rgb(219, 76, 63);
-  font-size: 30px;
-   text-align: center;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-}
-h3{
-  font-size: 25px;
-  color: rgb(70, 68, 68);
-  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-}
-.task-area{
-  flex-grow: 1; 
-  padding: 40px;
-}
-/* 1. The Dark Background Overlay */
-.modal {
-  position: fixed;       /* Stay in place even if scrolling */
-  top: 0;
-  left: 0;
+  border: 1px solid transparent;
+  transition: box-shadow 0.15s, border-color 0.15s, transform 0.1s;
+
+  margin-bottom: 0;
+  box-sizing: border-box;
   width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
-  display: flex;         /* Use Flexbox to center the white box */
+}
+
+.task-card:hover {
+  box-shadow: 0 4px 8px rgba(9,30,66,0.3);
+  border-color: rgb(0, 82, 204);
+}
+
+/* ── CHECKBOX ROW ── */
+.check-box {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.check-box span {
+  font-size: 14px;
+  font-weight: 500;
+  color: rgb(23, 43, 77);
+  line-height: 20px;
+}
+
+.category-badge {
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 600;
+  display: inline-block;
+  width: fit-content;
+  color: rgb(255, 255, 255);
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+}
+
+.Urgent  { background-color: rgb(222, 53, 11); }
+.Inbox   { background-color: rgb(107, 119, 140); }
+.Planned { background-color: rgb(0, 82, 204); }
+.Done    { background-color: rgb(0, 135, 90); }
+
+/* ── DATE TEXT ── */
+.task-card > span:not(.category-badge) {
+  font-size: 11px;
+  color: rgb(94, 108, 132);
+}
+
+/* ── CARD BUTTONS ── */
+.card-buttons {
+  display: flex;
+  gap: 6px;
+  visibility: hidden;
+  margin-top: 2px;
+}
+
+.task-card:hover .card-buttons { visibility: visible; }
+
+.delete-btn, .edit-btn {
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  border: none;
+  border-radius: 4px;
+  padding: 5px 10px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.edit-btn { background-color: rgb(0, 82, 204); color: rgb(255, 255, 255); }
+.edit-btn:hover { background-color: rgb(0, 101, 255); }
+
+.delete-btn { 
+  background-color: rgb(235, 236, 240); 
+  color: rgb(222, 53, 11); 
+  border: 1px solid rgb(222, 53, 11); }
+.delete-btn:hover {
+   background-color: rgb(255, 235, 230); }
+
+/* ── ADD COLUMN BUTTON ── */
+#new-column {
+  background-color: rgba(255, 255, 255, 0.2);
+  color: rgb(255, 255, 255);
+  border: none;
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  min-width: 200px;
+  text-align: left;
+  transition: background 0.15s;
+}
+
+#new-column:hover { background-color: rgba(255, 255, 255, 0.3); }
+
+
+.modal {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background-color: rgba(9, 30, 66, 0.6);
+  display: flex;
   justify-content: center;
   align-items: center;
-
+  /* z-index: 100; */
 }
 
-/* 2. The White Box (The actual popup) */
+
 .modal-content {
-  background-color: white;
-  padding: 30px;
-  border-radius: 10px;
-  width: 300px;
-  text-align: center;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  background-color: rgb(255, 255, 255);
+  border-radius: 8px;
+  padding: 24px;
+  width: 340px;
+  box-shadow: 0 8px 24px rgba(9, 30, 66, 0.4);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
-/* 3. Making the Inputs look nice */
-.modal-content input, .modal-content select {
-  width: 90%;
-  padding: 10px;
-  margin: 10px 0;
-  border: 1px solid #ddd;
-  border-radius: 10px;
+.modal-content h3 {
+  font-size: 16px;
+  font-weight: 700;
+  color: rgb(23, 43, 77);
+  padding: 0;
+  margin-bottom: 4px;
 }
 
-/* 4. The Buttons */
+.modal-content input,
+.modal-content select {
+  width: 100%;
+  padding: 8px 10px;
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  color: rgb(23, 43, 77);
+  background-color: rgb(244, 247, 250);
+  border: 2px solid rgb(136, 166, 243);
+  border-radius: 4px;
+  transition: border-color 0.15s, background 0.15s;
+}
+
+.modal-content input:focus,
+.modal-content select:focus {
+  background-color: rgb(255, 255, 255);
+  box-shadow: 0 0 0 2px rgba(0, 82, 204, 0.15);
+}
+
+
 .modal-buttons {
   display: flex;
-  justify-content: space-between; /* Push buttons apart */
-  margin-top: 15px;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: 4px;
 }
 
 #save-btn {
-  background-color: rgb(219, 76, 63);
-  color: white;
+  background-color: rgb(0, 82, 204);
+  color: rgb(255, 255, 255);
   border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 8px 18px;
+  border-radius: 4px;
   cursor: pointer;
+  transition: background 0.15s;
 }
+
+#save-btn:hover { background-color: rgb(0, 101, 255); }
 
 #cancel-btn {
-  background-color: #ccc;
+  background-color: transparent;
+  color: #172b4d;
   border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 8px 14px;
+  border-radius: 4px;
   cursor: pointer;
+  transition: background 0.15s;
 }
 
-/* 5. The Magic Class to Hide it */
-.hidden {
-  display: none;
-}
-.delete-btn,.edit-btn{
-  color: rgb(255, 244, 244);
-  border: none;
-  border-radius: 6px;
-  padding: 10px 10px;
-  font-size: 12px;
-  margin-left: auto;
-  background-color: rgb(219, 76, 63)
-}
-.task-card{
-  display: flex;
-  justify-content: space-between;
-  width: 45%;
-  background-color: rgb(247, 221, 221);
-  border: 1px;
-  padding: 15px;
-  box-shadow: 2px 3px 10px 4px rgba(0, 0, 0, 0.5);
-  border-radius: 10px;
-  align-items: center;
-  margin-bottom: 5%;
-}
+#cancel-btn:hover { background-color: rgb(235, 236, 240); }
+
+.hidden { display: none; }
