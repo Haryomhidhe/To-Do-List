@@ -13,6 +13,7 @@ const date = document.querySelector('#date');
 const newcolumn = document.querySelector('#new-column');
 const board = document.querySelector('.board');
 const searchBar = document.querySelector('#search-bar')
+const description = document.querySelector('#modal-description')
 // const editBtn = document.querySelector('.edit-btn');
 let tasks = []; // We move this to the top so everyone can use it
 let columns = [];
@@ -77,6 +78,7 @@ saveBtn.addEventListener('click', function(){
   const taskName = nameInput.value;
   const taskCategory = categoryInput.value;
   const taskDate = date.value;
+  const taskdescription = description.value;
   if (taskName) {
 
     if(currentEditTask){
@@ -89,6 +91,7 @@ saveBtn.addEventListener('click', function(){
         category: taskCategory,
         date: taskDate,
         originalCategory: taskCategory,
+        description: taskdescription,
       }
         tasks.push(newTask);
       };
@@ -116,6 +119,7 @@ function renderTask(task) {
     <span>${task.name}</span>
    </div> 
     <span class="category-badge ${task.category} ">${task.category}</span>
+    <span>${task.description ? task.description: 'No description set'} </span>
     <span>${task.date ? new Date(task.date).toLocaleString():'No date set '}</span>
     <div class="card-buttons">
     <button class="delete-btn">Delete</button>

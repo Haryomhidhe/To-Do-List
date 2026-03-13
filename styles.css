@@ -251,6 +251,7 @@ h2, h3 {
 }
 
 .modal-content input,
+.modal-content textarea,
 .modal-content select {
   width: 100%;
   padding: 8px 10px;
