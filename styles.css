@@ -39,7 +39,7 @@ h1 {
 #search-bar {
   background-color: rgba(255, 255, 255, 0.2);
   border: 1px solid rgba(255, 255, 255, 0.3);
-  color: rgb(255, 255, 255);
+  color: rgb(0, 0, 0);
   font-family: 'Inter', sans-serif;
   font-size: 13px;
   padding: 6px 12px;
@@ -57,7 +57,7 @@ h1 {
   width: 240px;
 }
 
-#search-bar:focus::placeholder { color: rgb(151, 160, 175); }
+#search-bar:focus::placeholder { color: rgb(0, 0, 0); }
 
 #create-btn {
   background-color: rgba(255, 255, 255, 0.25);
@@ -166,7 +166,7 @@ h2, h3 {
 /* ── DATE TEXT ── */
 .task-card > span:not(.category-badge) {
   font-size: 11px;
-  color: #5e6c84;
+  color: rgb(94, 108, 132);
 }
 
 /* ── CARD BUTTONS ── */
